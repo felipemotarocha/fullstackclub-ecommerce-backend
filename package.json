@@ -15,6 +15,7 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "dotenv": "^12.0.3"
+    "dotenv": "^12.0.3",
+    "mongoose": "^6.1.6"
   }
 }
