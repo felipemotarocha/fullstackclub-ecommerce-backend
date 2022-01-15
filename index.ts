@@ -1,9 +1,9 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv'
 
-import connectToDatabase from "./src/database/mongoose.database";
+import connectToDatabase from './src/database/mongoose.database'
 
-dotenv.config();
+dotenv.config()
 
-connectToDatabase();
+connectToDatabase()
 
-console.log("hello world!");
+console.log('hello world!')
