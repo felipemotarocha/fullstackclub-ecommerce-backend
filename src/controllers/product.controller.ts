@@ -100,8 +100,45 @@ export class ProductController implements ProductControllerAbstract {
     }
   }
 
-  update(httpRequest: HttpRequest): Promise<HttpResponse> {
-    throw new Error('Method not implemented.')
+  async update(httpRequest: HttpRequest): Promise<HttpResponse> {
+    try {
+      // verificar se os campos fornecidos para atualização são permitidos
+      const body = httpRequest.body
+      const params = httpRequest.params
+
+      const allowedUpdates = ['name', 'imageUrl', 'collection']
+
+      const someReceivedUpdateIsNotAllowed = Object.keys(body).some(
+        (update) => !allowedUpdates.includes(update)
+      )
+
+      if (someReceivedUpdateIsNotAllowed) {
+        return {
+          statusCode: 400,
+          body: 'Some received field is not allowed to update.'
+        }
+      }
+
+      // verificar se um ID foi fornecido por parâmetro
+      if (!params.id) {
+        return {
+          statusCode: 400,
+          body: 'Missing param id.'
+        }
+      }
+
+      const product = await this.productService.update(params.id, body)
+
+      return {
+        statusCode: 200,
+        body: product
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: 'Something went wrong. Try again later.'
+      }
+    }
   }
 
   delete(httpRequest: HttpRequest): Promise<HttpResponse> {
