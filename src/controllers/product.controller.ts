@@ -130,7 +130,26 @@ export class ProductController implements ProductControllerAbstract {
     }
   }
 
-  delete(httpRequest: HttpRequest): Promise<HttpResponse> {
-    throw new Error('Method not implemented.')
+  async delete(httpRequest: HttpRequest): Promise<HttpResponse> {
+    try {
+      const params = httpRequest.params
+
+      // verificar se um ID foi fornecido por parâmetro
+      if (!params.id) {
+        return {
+          statusCode: 400,
+          body: 'Missing param id.'
+        }
+      }
+
+      const product = await this.productService.delete(params.id)
+
+      return {
+        statusCode: 200,
+        body: product
+      }
+    } catch (error) {
+      return ControllersHelpers.serverError()
+    }
   }
 }
