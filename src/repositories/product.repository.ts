@@ -5,7 +5,7 @@ import ProductModel from '../models/product.model'
 
 export interface ProductRepositoryAbstract {
   create: (createProductDto: CreateProductDto) => Promise<Product>
-  getOne: (id: string) => Promise<Product> | null
+  getOne: (id: string) => Promise<Product | null>
   getAll: () => Promise<Product[]>
   update: (id: string, updateProductDto: UpdateProductDto) => Promise<Product>
   delete: (id: string) => Promise<Product>
