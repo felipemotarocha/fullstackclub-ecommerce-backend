@@ -1,3 +1,4 @@
+import ControllersHelpers from '../helpers/controllers.helpers'
 import { ProductServiceAbstract } from '../services/product.service'
 
 interface HttpRequest {
@@ -51,10 +52,7 @@ export class ProductController implements ProductControllerAbstract {
         body: product
       }
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: 'Something went wrong. Try again later.'
-      }
+      return ControllersHelpers.serverError()
     }
   }
 
@@ -77,10 +75,7 @@ export class ProductController implements ProductControllerAbstract {
         body: product
       }
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: 'Something went wrong. Try again later.'
-      }
+      return ControllersHelpers.serverError()
     }
   }
 
@@ -93,10 +88,7 @@ export class ProductController implements ProductControllerAbstract {
         body: products
       }
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: 'Something went wrong. Try again later.'
-      }
+      return ControllersHelpers.serverError()
     }
   }
 
@@ -134,10 +126,7 @@ export class ProductController implements ProductControllerAbstract {
         body: product
       }
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: 'Something went wrong. Try again later.'
-      }
+      return ControllersHelpers.serverError()
     }
   }
 
