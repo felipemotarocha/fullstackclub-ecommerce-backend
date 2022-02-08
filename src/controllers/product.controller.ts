@@ -58,8 +58,30 @@ export class ProductController implements ProductControllerAbstract {
     }
   }
 
-  getOne(httpRequest: HttpRequest): Promise<HttpResponse> {
-    throw new Error('Method not implemented.')
+  async getOne(httpRequest: HttpRequest): Promise<HttpResponse> {
+    try {
+      // verificar se um ID foi fornecido por parâmetro
+      const params = httpRequest.params
+
+      if (!params.id) {
+        return {
+          statusCode: 400,
+          body: 'Missing param id.'
+        }
+      }
+
+      const product = await this.productService.getOne(params.id)
+
+      return {
+        statusCode: 200,
+        body: product
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: 'Something went wrong. Try again later.'
+      }
+    }
   }
 
   getAll(httpRequest: HttpRequest): Promise<HttpResponse> {
