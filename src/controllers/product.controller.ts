@@ -14,7 +14,7 @@ interface HttpResponse {
 interface ProductControllerAbstract {
   create(httpRequest: HttpRequest): Promise<HttpResponse>
   getOne(httpRequest: HttpRequest): Promise<HttpResponse>
-  getAll(httpRequest: HttpRequest): Promise<HttpResponse>
+  getAll(): Promise<HttpResponse>
   update(httpRequest: HttpRequest): Promise<HttpResponse>
   delete(httpRequest: HttpRequest): Promise<HttpResponse>
 }
@@ -84,8 +84,20 @@ export class ProductController implements ProductControllerAbstract {
     }
   }
 
-  getAll(httpRequest: HttpRequest): Promise<HttpResponse> {
-    throw new Error('Method not implemented.')
+  async getAll(): Promise<HttpResponse> {
+    try {
+      const products = await this.productService.getAll()
+
+      return {
+        statusCode: 200,
+        body: products
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: 'Something went wrong. Try again later.'
+      }
+    }
   }
 
   update(httpRequest: HttpRequest): Promise<HttpResponse> {
