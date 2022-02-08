@@ -1,3 +1,8 @@
+import {
+  MissingFieldError,
+  MissingParamError,
+  NotAllowedUpdateError
+} from '../errors/controllers.errors'
 import ControllersHelpers from '../helpers/controllers.helpers'
 import { ProductServiceAbstract } from '../services/product.service'
 
@@ -38,10 +43,7 @@ export class ProductController implements ProductControllerAbstract {
 
       for (const field of requiredFields) {
         if (!body[field]) {
-          return {
-            statusCode: 400,
-            body: `Missing ${field}.`
-          }
+          return ControllersHelpers.badRequest(new MissingFieldError(field))
         }
       }
 
@@ -59,10 +61,7 @@ export class ProductController implements ProductControllerAbstract {
       const params = httpRequest.params
 
       if (!params.id) {
-        return {
-          statusCode: 400,
-          body: 'Missing param id.'
-        }
+        return ControllersHelpers.badRequest(new MissingParamError('id'))
       }
 
       const product = await this.productService.getOne(params.id)
@@ -96,18 +95,12 @@ export class ProductController implements ProductControllerAbstract {
       )
 
       if (someReceivedUpdateIsNotAllowed) {
-        return {
-          statusCode: 400,
-          body: 'Some received field is not allowed to update.'
-        }
+        return ControllersHelpers.badRequest(new NotAllowedUpdateError())
       }
 
       // verificar se um ID foi fornecido por parâmetro
       if (!params.id) {
-        return {
-          statusCode: 400,
-          body: 'Missing param id.'
-        }
+        return ControllersHelpers.badRequest(new MissingParamError('id'))
       }
 
       const product = await this.productService.update(params.id, body)
@@ -124,10 +117,7 @@ export class ProductController implements ProductControllerAbstract {
 
       // verificar se um ID foi fornecido por parâmetro
       if (!params.id) {
-        return {
-          statusCode: 400,
-          body: 'Missing param id.'
-        }
+        return ControllersHelpers.badRequest(new MissingParamError('id'))
       }
 
       const product = await this.productService.delete(params.id)
