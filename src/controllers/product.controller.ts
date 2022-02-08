@@ -1,13 +1,13 @@
 import ControllersHelpers from '../helpers/controllers.helpers'
 import { ProductServiceAbstract } from '../services/product.service'
 
-interface HttpRequest {
+export interface HttpRequest {
   body?: any
   params?: any
   query?: any
 }
 
-interface HttpResponse {
+export interface HttpResponse {
   statusCode: number
   body: any
 }
@@ -70,10 +70,7 @@ export class ProductController implements ProductControllerAbstract {
 
       const product = await this.productService.getOne(params.id)
 
-      return {
-        statusCode: 200,
-        body: product
-      }
+      return ControllersHelpers.ok(product)
     } catch (error) {
       return ControllersHelpers.serverError()
     }
@@ -83,10 +80,7 @@ export class ProductController implements ProductControllerAbstract {
     try {
       const products = await this.productService.getAll()
 
-      return {
-        statusCode: 200,
-        body: products
-      }
+      return ControllersHelpers.ok(products)
     } catch (error) {
       return ControllersHelpers.serverError()
     }
@@ -121,10 +115,7 @@ export class ProductController implements ProductControllerAbstract {
 
       const product = await this.productService.update(params.id, body)
 
-      return {
-        statusCode: 200,
-        body: product
-      }
+      return ControllersHelpers.ok(product)
     } catch (error) {
       return ControllersHelpers.serverError()
     }
@@ -144,10 +135,7 @@ export class ProductController implements ProductControllerAbstract {
 
       const product = await this.productService.delete(params.id)
 
-      return {
-        statusCode: 200,
-        body: product
-      }
+      return ControllersHelpers.ok(product)
     } catch (error) {
       return ControllersHelpers.serverError()
     }
