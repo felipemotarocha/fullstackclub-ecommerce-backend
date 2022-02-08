@@ -47,10 +47,7 @@ export class ProductController implements ProductControllerAbstract {
 
       const product = await this.productService.create(httpRequest.body)
 
-      return {
-        statusCode: 201,
-        body: product
-      }
+      return ControllersHelpers.created(product)
     } catch (error) {
       return ControllersHelpers.serverError()
     }
