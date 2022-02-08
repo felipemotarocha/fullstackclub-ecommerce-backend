@@ -1,5 +1,5 @@
 const MongooseHelper = {
-  map(data: any) {
+  map<T>(data: any): T {
     const { _id, ...rest } = data
 
     return {
