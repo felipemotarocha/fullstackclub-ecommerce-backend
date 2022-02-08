@@ -10,5 +10,7 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "space-before-function-paren": "off"
+  }
 }
