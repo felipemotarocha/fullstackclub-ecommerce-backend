@@ -73,7 +73,7 @@ export class ProductController implements BaseControllerAbstract {
       const body = httpRequest.body
       const params = httpRequest.params
 
-      const allowedUpdates = ['name', 'imageUrl', 'category']
+      const allowedUpdates = ['name', 'imageUrl', 'price', 'category']
 
       const someReceivedUpdateIsNotAllowed = Object.keys(body).some(
         (update) => !allowedUpdates.includes(update)
