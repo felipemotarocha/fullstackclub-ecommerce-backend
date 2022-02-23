@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv'
 import * as express from 'express'
-import cors from 'cors'
+import * as cors from 'cors'
 
 import productRouter from './src/routes/product.routes'
 
@@ -19,5 +19,3 @@ app.use('/api/product', productRouter)
 
 const port = process.env.PORT || 8000
 app.listen(port, () => console.log(`listening on port ${port}!`))
-
-console.log('hello world!')

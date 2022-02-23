@@ -3,7 +3,7 @@ interface Product {
   name: string
   price: number
   imageUrl: string
-  collection: string
+  category: string
 }
 
 export default Product
