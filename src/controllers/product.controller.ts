@@ -5,27 +5,12 @@ import {
 } from '../errors/controllers.errors'
 import ControllersHelpers from '../helpers/controllers.helpers'
 import { ProductServiceAbstract } from '../services/product.service'
+import BaseControllerAbstract, {
+  HttpRequest,
+  HttpResponse
+} from './base.controller'
 
-export interface HttpRequest {
-  body?: any
-  params?: any
-  query?: any
-}
-
-export interface HttpResponse {
-  statusCode: number
-  body: any
-}
-
-interface ProductControllerAbstract {
-  create(httpRequest: HttpRequest): Promise<HttpResponse>
-  getOne(httpRequest: HttpRequest): Promise<HttpResponse>
-  getAll(): Promise<HttpResponse>
-  update(httpRequest: HttpRequest): Promise<HttpResponse>
-  delete(httpRequest: HttpRequest): Promise<HttpResponse>
-}
-
-export class ProductController implements ProductControllerAbstract {
+export class ProductController implements BaseControllerAbstract {
   private readonly productService: ProductServiceAbstract
 
   constructor(productService: ProductServiceAbstract) {
