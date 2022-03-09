@@ -23,7 +23,12 @@ export class MongoCategoryRepository implements CategoryRepositoryAbstract {
   }
 
   async getAll() {
-    const categories = await CategoryModel.find({}).populate('products').exec()
+    const categories = await CategoryModel.find({})
+      .populate({
+        path: 'products',
+        perDocumentLimit: 4
+      })
+      .exec()
 
     return categories.map((category) => {
       return {
