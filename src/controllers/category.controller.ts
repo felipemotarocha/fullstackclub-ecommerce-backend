@@ -18,7 +18,7 @@ export class CategoryController implements BaseControllerAbstract {
     try {
       const body = httpRequest.body
 
-      const requiredFields = ['name', 'imageUrl', 'products']
+      const requiredFields = ['name', 'imageUrl']
 
       for (const field of requiredFields) {
         if (!body[field]) {

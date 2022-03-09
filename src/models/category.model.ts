@@ -1,4 +1,4 @@
-import { Schema, model, Types } from 'mongoose'
+import { Schema, model } from 'mongoose'
 
 const categorySchema = new Schema({
   name: {
@@ -8,12 +8,13 @@ const categorySchema = new Schema({
   imageUrl: {
     type: String,
     required: true
-  },
-  products: {
-    type: [Types.ObjectId],
-    ref: 'Product',
-    required: true
   }
+})
+
+categorySchema.virtual('products', {
+  ref: 'Product',
+  localField: '_id',
+  foreignField: 'category'
 })
 
 const CategoryModel = model('Category', categorySchema)
