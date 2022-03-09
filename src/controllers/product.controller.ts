@@ -57,9 +57,11 @@ export class ProductController implements BaseControllerAbstract {
     }
   }
 
-  async getAll(): Promise<HttpResponse> {
+  async getAll(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const products = await this.productService.getAll()
+      const products = await this.productService.getAll(
+        httpRequest.query.category
+      )
 
       return ControllersHelpers.ok(products)
     } catch (error) {

@@ -12,7 +12,7 @@ export interface HttpResponse {
 interface BaseControllerAbstract {
   create(httpRequest: HttpRequest): Promise<HttpResponse>
   getOne(httpRequest: HttpRequest): Promise<HttpResponse>
-  getAll(): Promise<HttpResponse>
+  getAll(httpRequest: HttpRequest): Promise<HttpResponse>
   update(httpRequest: HttpRequest): Promise<HttpResponse>
   delete(httpRequest: HttpRequest): Promise<HttpResponse>
 }

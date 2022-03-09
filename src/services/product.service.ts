@@ -5,7 +5,7 @@ import { ProductRepositoryAbstract } from '../repositories/product.repository'
 export interface ProductServiceAbstract {
   create: (createProductDto: CreateProductDto) => Promise<Product>
   getOne: (id: string) => Promise<Product | null>
-  getAll: () => Promise<Product[]>
+  getAll: (category?: string) => Promise<Product[]>
   update: (id: string, updateProductDto: UpdateProductDto) => Promise<Product>
   delete: (id: string) => Promise<Product>
 }
@@ -25,8 +25,8 @@ export class ProductService implements ProductServiceAbstract {
     return await this.productRepository.getOne(id)
   }
 
-  async getAll() {
-    return await this.productRepository.getAll()
+  async getAll(category?: string) {
+    return await this.productRepository.getAll(category)
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
