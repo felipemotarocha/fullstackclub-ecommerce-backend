@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+      - run: yarn
+      - run: yarn test:ci
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'club-ecommerce-api'
+          heroku_email: 'fmroocha@gmail.com'
+          usedocker: true
+        env:
+          HD_NODE_ENV: production
+          HD_DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          HD_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}

@@ -21,7 +21,7 @@ export class MongoProductRepository implements ProductRepositoryAbstract {
   async getOne(id: string) {
     const product = await ProductModel.findById(id)
 
-    return MongooseHelper.map<Product>(product.toJSON())
+    return MongooseHelper.map<Product>(product?.toJSON())
   }
 
   async getAll(category?: string) {
@@ -43,12 +43,12 @@ export class MongoProductRepository implements ProductRepositoryAbstract {
       new: true
     })
 
-    return MongooseHelper.map<Product>(product.toJSON())
+    return MongooseHelper.map<Product>(product?.toJSON())
   }
 
   async delete(id: string) {
     const product = await ProductModel.findByIdAndDelete(id)
 
-    return MongooseHelper.map<Product>(product.toJSON())
+    return MongooseHelper.map<Product>(product?.toJSON())
   }
 }

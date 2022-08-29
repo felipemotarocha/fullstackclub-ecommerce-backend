@@ -33,7 +33,7 @@ export class MongoCategoryRepository implements CategoryRepositoryAbstract {
     return categories.map((category) => {
       return {
         ...MongooseHelper.map<Category>(category.toJSON()),
-        products: category.products.map((product) =>
+        products: (category as any).products.map((product) =>
           MongooseHelper.map<Product>(product.toJSON())
         )
       }
@@ -43,7 +43,7 @@ export class MongoCategoryRepository implements CategoryRepositoryAbstract {
   async getOne(id: string) {
     const category = await CategoryModel.findById(id)
 
-    return MongooseHelper.map<Category>(category.toJSON())
+    return MongooseHelper.map<Category>(category?.toJSON())
   }
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
@@ -53,12 +53,12 @@ export class MongoCategoryRepository implements CategoryRepositoryAbstract {
       { new: true }
     )
 
-    return MongooseHelper.map<Category>(category.toJSON())
+    return MongooseHelper.map<Category>(category?.toJSON())
   }
 
   async delete(id: string) {
     const category = await CategoryModel.findByIdAndDelete(id, { new: true })
 
-    return MongooseHelper.map<Category>(category.toJSON())
+    return MongooseHelper.map<Category>(category?.toJSON())
   }
 }
