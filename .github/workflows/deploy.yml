@@ -15,9 +15,7 @@ jobs:
           node-version: 16
           cache: yarn
       - run: yarn
-      - run: yarn test:ci
   build:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
