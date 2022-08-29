@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "ts-node-dev --respawn index.ts",
-    "husky:prepare": "husky install"
+    "husky:prepare": "husky install",
+    "build": "tsc --build"
   },
   "keywords": [],
   "author": "",
